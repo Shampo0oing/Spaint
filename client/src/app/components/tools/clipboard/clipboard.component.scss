@@ -1,0 +1,27 @@
+@import '../generic-tool/generic-tool.component';
+
+.contenue {
+    display: flex;
+    flex-wrap: wrap;
+    :nth-child(n + 3) {
+        margin-top: 20px;
+    }
+    button {
+        flex: 50%;
+        height: 40px;
+        color: var(--text-color);
+    }
+    .notClickable {
+        pointer-events: none;
+        color: grey;
+    }
+}
+
+.tab {
+    margin-left: 10px;
+}
+
+.popup {
+    position: fixed;
+    top: calc(530px + 1em);
+}

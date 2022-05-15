@@ -1,0 +1,50 @@
+<div>
+    <button
+        (click)="selectPolygon()"
+        [ngClass]="{ active: getCurrentTool() === 'polygon' }"
+        matTooltip="polygone (3)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <i class="fas fa-draw-polygon"></i>
+    </button>
+    <div class="popup" #popup [ngStyle]="{ display: getCurrentTool() != 'polygon' ? 'none' : 'block' }" cdkDrag>
+        <div class="popup-header">
+            <div class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" id="header" cdkDragHandle>
+                <label>Paramétres</label>
+                <button class="close-button" (click)="closeParametre()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <label>Épaisseur du contour (px): {{ polygonWidth }}</label>
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="POLYGON_MAX_WIDTH"
+                    [min]="POLYGON_MIN_WIDTH"
+                    [(ngModel)]="polygonWidth"
+                    (input)="changePolygonWidthSlider($event)"
+                ></mat-slider>
+                <hr />
+                <label>Nombres de cotés: {{ numberOfEdges }}</label>
+
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="POLYGON_MAX_EDGE"
+                    [min]="POLYGON_MIN_EDGE"
+                    [(ngModel)]="numberOfEdges"
+                    (input)="changePolygonEdgeSlider($event)"
+                ></mat-slider>
+                <hr />
+                <label
+                    >Type de tracé:
+                    <select id="typeSelector" (change)="changeTraceType($event.target.value)" style="width: 50%">
+                        <option value="0">Contour</option>
+                        <option value="1">Plein</option>
+                        <option value="2">Plein avec contour</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

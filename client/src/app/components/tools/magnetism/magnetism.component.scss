@@ -1,0 +1,40 @@
+@import './src/app/components/tools/generic-tool/generic-tool.component.scss';
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    width: 40%;
+    margin-left: 25%;
+
+    input[type='radio'] {
+        width: 25px;
+        height: 2em;
+    }
+
+    input[type='radio']:after {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        top: 10%;
+        position: relative;
+        background-color: var(--dark);
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid var(--text-color);
+    }
+
+    input[type='radio']:checked:after {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        top: 10%;
+        position: relative;
+        background-color: var(--text-color);
+        content: '';
+        display: inline-block;
+        visibility: visible;
+    }
+}

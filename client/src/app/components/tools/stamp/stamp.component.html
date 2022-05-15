@@ -1,0 +1,60 @@
+<div>
+    <button
+        (click)="selectStamp()"
+        [ngClass]="{ active: getCurrentTool() === 'stamp' }"
+        matTooltip="étampe (D)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <i class="fas fa-stamp"></i>
+    </button>
+    <div class="popup" #popup [ngStyle]="{ display: getCurrentTool() != 'stamp' ? 'none' : 'block' }" cdkDrag>
+        <div class="popup-header">
+            <div class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" id="header" cdkDragHandle>
+                <label>Paramétres</label>
+                <button class="close-button" (click)="closeParametre()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <div class="stamp-scroll" (mousewheel)="$event.stopPropagation()">
+                    <img
+                        *ngFor="let link of stampService.links"
+                        src="{{ link }}"
+                        class="stamp"
+                        alt="failedToLoad"
+                        tabindex="-1"
+                        (click)="stampService.updateImage(link)"
+                    />
+                </div>
+                <div class="input-container">
+                    <div class="slider-header">
+                        <label>Échelle de l'étampe: {{ drawingService.stampScale }}</label>
+                        <i class="far fa-keyboard" matTooltip="SHIFT + Molette" matTooltipClass="tooltip"></i>
+                    </div>
+                    <mat-slider
+                        id="epaisseurSlider"
+                        [max]="stampService.STAMP_MAX_SCALE"
+                        [min]="stampService.STAMP_MIN_SCALE"
+                        [(ngModel)]="drawingService.stampScale"
+                        (input)="stampService.changeStampScaleSlider($event.value)"
+                    ></mat-slider>
+                </div>
+                <div class="input-container">
+                    <div class="slider-header">
+                        <label>Angle de l'étampe: {{ stampService.stampAngle }}</label>
+                        <i class="far fa-keyboard" matTooltip="Molette ou ALT + Molette" matTooltipClass="tooltip"></i>
+                    </div>
+                    <mat-slider
+                        id="epaisseurSlider"
+                        [step]="stampService.stepScroll"
+                        [max]="stampService.STAMP_MAX_ANGLE"
+                        [min]="stampService.STAMP_MIN_ANGLE"
+                        [(ngModel)]="stampService.stampAngle"
+                        (input)="stampService.changeStampAngleSlider($event)"
+                    ></mat-slider>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

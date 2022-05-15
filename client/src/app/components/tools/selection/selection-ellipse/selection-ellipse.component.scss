@@ -1,0 +1,11 @@
+@import './src/app/components/tools/generic-tool/generic-tool.component.scss';
+
+#selectionEllipse {
+    position: absolute;
+    outline: rgb(130, 128, 127) dotted 2px;
+    z-index: 0;
+    cursor: crosshair;
+    visibility: visible;
+    border: 2px dotted rgb(130, 128, 127);
+    border-radius: 50%;
+}

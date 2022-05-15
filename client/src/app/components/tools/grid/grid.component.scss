@@ -1,0 +1,8 @@
+@import './src/app/components/tools/generic-tool/generic-tool.component.scss';
+
+.popup {
+    position: fixed;
+    right: 0;
+    right: calc(300px + 1em);
+    top: calc(435px + 1em);
+}

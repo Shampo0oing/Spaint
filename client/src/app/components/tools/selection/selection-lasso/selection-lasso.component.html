@@ -1,0 +1,57 @@
+<div
+    #box
+    id="selectionLasso"
+    [ngStyle]="{
+        display: drawingService.selected && toolSelector.currentTool.getCurrentToolString() === 'selectionLasso' ? 'block' : 'none'
+    }"
+    [style.left.px]="selectionLassoService.boxResizerPosition.x"
+    [style.top.px]="selectionLassoService.boxResizerPosition.y"
+    [style.width.px]="selectionLassoService.boxResizerDimension.x"
+    [style.height.px]="selectionLassoService.boxResizerDimension.y"
+>
+    <div>
+        <button class="buttonResizer upper-left" [style.left.px]="0" [style.top.px]="0" (mousedown)="selectionLassoService.setStatus(1)"></button>
+        <button
+            class="buttonResizer upper-middle"
+            [style.left.px]="selectionLassoService.boxResizerDimension.x / 2"
+            [style.top.px]="0"
+            (mousedown)="selectionLassoService.setStatus(2)"
+        ></button>
+        <button
+            class="buttonResizer upper-right"
+            [style.left.px]="selectionLassoService.boxResizerDimension.x"
+            [style.top.px]="0"
+            (mousedown)="selectionLassoService.setStatus(3)"
+        ></button>
+        <button
+            class="buttonResizer middle-left"
+            [style.left.px]="0"
+            [style.top.px]="selectionLassoService.boxResizerDimension.y / 2"
+            (mousedown)="selectionLassoService.setStatus(4)"
+        ></button>
+        <button
+            class="buttonResizer middle-right"
+            [style.left.px]="selectionLassoService.boxResizerDimension.x"
+            [style.top.px]="selectionLassoService.boxResizerDimension.y / 2"
+            (mousedown)="selectionLassoService.setStatus(6)"
+        ></button>
+        <button
+            class="buttonResizer bottom-left"
+            [style.left.px]="0"
+            [style.top.px]="selectionLassoService.boxResizerDimension.y"
+            (mousedown)="selectionLassoService.setStatus(7)"
+        ></button>
+        <button
+            class="buttonResizer bottom-middle"
+            [style.left.px]="selectionLassoService.boxResizerDimension.x / 2"
+            [style.top.px]="selectionLassoService.boxResizerDimension.y"
+            (mousedown)="selectionLassoService.setStatus(8)"
+        ></button>
+        <button
+            class="buttonResizer bottom-right"
+            [style.left.px]="selectionLassoService.boxResizerDimension.x"
+            [style.top.px]="selectionLassoService.boxResizerDimension.y"
+            (mousedown)="selectionLassoService.setStatus(9)"
+        ></button>
+    </div>
+</div>

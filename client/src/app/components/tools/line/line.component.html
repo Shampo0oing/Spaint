@@ -1,0 +1,51 @@
+<div>
+    <button
+        [ngClass]="{ active: getCurrentTool() === 'line' }"
+        (click)="selectLine()"
+        matTooltip="ligne (L)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <svg stroke="#b8c1ec" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 100 100">
+            <line x1="70" y1="30" x2="30" y2="70" />
+        </svg>
+    </button>
+    <div class="popup" #popup [ngStyle]="{ display: getCurrentTool() != 'line' ? 'none' : 'block' }" cdkDrag>
+        <div class="popup-header">
+            <div id="header" class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" cdkDragHandle>
+                <label>Paramètres</label>
+                <button class="close-button" (click)="closeParametre()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <label>Épaisseur du trait (px): {{ lineWidth }}</label>
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="LINE_MAX_WIDTH"
+                    [min]="LINE_MIN_WIDTH"
+                    [(ngModel)]="lineWidth"
+                    (input)="changeLineWidthSlider($event)"
+                ></mat-slider>
+                <hr />
+                <label>Épaisseur du point (px): {{ pointWidth }}</label>
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="LINE_MAX_WIDTH"
+                    [min]="LINE_MIN_WIDTH"
+                    [(ngModel)]="pointWidth"
+                    (input)="changePointWidthSlider($event)"
+                ></mat-slider>
+                <hr />
+                <label
+                    >Type de jonction:
+                    <select id="typeSelector" (change)="changeJunctionType($event.target.value)" style="width: 50%">
+                        <option value="0">Sans point</option>
+                        <option value="1">Avec point</option>
+                    </select>
+                </label>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

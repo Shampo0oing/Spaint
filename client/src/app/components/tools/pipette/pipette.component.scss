@@ -1,0 +1,94 @@
+@import './src/app/components/tools/generic-tool/generic-tool.component.scss';
+
+.popup-header {
+    #header {
+        margin: 0;
+
+        .close-button {
+            height: 100%;
+
+            #x {
+                margin: auto;
+            }
+        }
+    }
+
+    .popup-content {
+        position: relative;
+        width: 300px;
+        height: 300px;
+
+        .message-wrapper {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .circle-message {
+                display: table;
+                width: 90%;
+                height: 90%;
+                border-radius: 50%;
+                border-width: 3px;
+                border-color: var(--text-color);
+
+                .content {
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: center;
+                    padding: 2em;
+
+                    div,
+                    i {
+                        margin-top: 1em;
+                    }
+                }
+            }
+        }
+
+        .magnifier-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+
+            .grid-cursor {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 10%;
+                height: 10%;
+                border-color: red;
+                border-width: 5px;
+                z-index: 1;
+            }
+
+            .magnifier-grid {
+                position: absolute;
+                width: 90%;
+                height: 90%;
+                border-radius: 50%;
+                box-shadow: 0 0 26px -2px #000000;
+                background-size: 9% 9%;
+                background-image: linear-gradient(to right, grey 2px, transparent 2px), linear-gradient(to bottom, grey 2px, transparent 2px);
+            }
+
+            #magnifier {
+                width: 90%;
+                height: 90%;
+                border-radius: 50%;
+                background-color: var(--dark);
+                image-rendering: pixelated;
+            }
+        }
+    }
+}

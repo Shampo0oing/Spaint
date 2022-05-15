@@ -1,0 +1,15 @@
+.slider-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    .colorSlider-cursor {
+        position: absolute;
+        margin: -10px 0; // on centre le curseur au milieur de la souris
+        border-color: #3b3636;
+        border-width: 2px;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        filter: drop-shadow(0px 0px 1px black);
+    }
+}

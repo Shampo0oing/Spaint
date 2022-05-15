@@ -1,0 +1,84 @@
+<div class="dialog-container text-spaced">
+    <div class="dialog-header" mat-dialog-title>
+        <div>Exportation du dessin</div>
+        <button class="close-button ml-auto" (click)="closeDialog()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="body-container">
+        <div class="preview-container">
+            <canvas #preview class="preview" [attr.width]="previewSize.width" [attr.height]="previewSize.height"></canvas>
+            <div class="size">{{ drawingService.canvas.width }} x {{ drawingService.canvas.height }}</div>
+            <mat-form-field>
+                <mat-label>Nom du dessin</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="name"
+                    name="fileName"
+                    [formControl]="nameFormControl"
+                    (keydown)="$event.stopPropagation()"
+                    [autofocus]="false"
+                />
+                <mat-error *ngIf="nameFormControl.hasError('required')">Le nom est <strong>requis</strong></mat-error>
+                <mat-error *ngIf="nameFormControl.hasError('minlength')">Le nom est trop <strong>court</strong></mat-error>
+                <mat-error *ngIf="nameFormControl.hasError('maxlength')">Le nom est trop <strong>long</strong></mat-error>
+                <mat-error *ngIf="!nameFormControl.hasError('minlength') && nameFormControl.hasError('pattern')"
+                    >Contient un ou des caractères <strong>incorects</strong></mat-error
+                >
+            </mat-form-field>
+        </div>
+        <div class="format-container">
+            <div class="extension-container">
+                <div class="extension"><i class="fas fa-file-image mr-3"></i>Extension</div>
+                <mat-radio-group class="radio-group uppercase" [(ngModel)]="extension">
+                    <mat-radio-button value="png">png</mat-radio-button>
+                    <mat-radio-button value="jpeg">jpg</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <mat-radio-group class="filter-container" [(ngModel)]="filter" (ngModelChange)="changeFilter($event)">
+                <div><i class="fas fa-filter mr-3"></i>Filtre</div>
+                <div class="radio-container">
+                    <mat-radio-button value="none">Aucun</mat-radio-button>
+                    <mat-radio-button value="invert">Inverse</mat-radio-button>
+                    <mat-radio-button value="sepia">Sepia</mat-radio-button>
+                    <mat-radio-button value="hue-rotate">Couleur <i class="fas fa-sync fa-xs"></i></mat-radio-button>
+                    <mat-radio-button value="blur">Flou</mat-radio-button>
+                    <mat-radio-button value="saturate">Saturation</mat-radio-button>
+                </div>
+                <mat-slider min="0" max="100" [(ngModel)]="percentage" (input)="percentage = $event.value; changeFilter(this.filter)"></mat-slider>
+            </mat-radio-group>
+        </div>
+    </div>
+    <div class="button-row">
+        <button #imgurButton mat-button class="imgur" (click)="uploadOnImgur()"
+                matTooltip="Upload rapide sur Imgur"
+                matTooltipPosition="below"
+                matTooltipClass="tooltip"
+        ></button>
+        <svg #loading></svg>
+        <div #imgurAction class="image-action">
+            <button
+                style="font-size: 20px; height: 100%"
+                (click)="imgurAction.style.display = 'none'; imgurButton._elementRef.nativeElement.style.display = 'flex'"
+            >
+                <i class="fas fa-arrow-circle-left"></i>
+            </button>
+            <div class="url" #url>
+                <a target="_blank" href="{{ imgurUrl }}">{{ imgurUrl.replace('https://', '') }}</a>
+            </div>
+            <button
+                #tooltip="matTooltip"
+                (click)="tooltip.show(); tooltip.message = 'Copié !'"
+                mat-stroked-button
+                [cdkCopyToClipboard]="imgurUrl"
+                matTooltip="Copier l'url de l'image"
+                matTooltipClass="tooltip"
+            >
+                <i class="far fa-clipboard"></i>
+            </button>
+        </div>
+        <button mat-stroked-button class="annuler" (click)="closeDialog()">Annuler</button>
+        <button mat-button class="telecharger" *ngIf="!nameFormControl.errors" (click)="createDownloadLink()">Télécharger</button>
+    </div>
+</div>

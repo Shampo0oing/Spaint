@@ -1,0 +1,17 @@
+<div class="contenue">
+    <mat-slide-toggle [checked]="drawingService.useMagnetism" (change)="toggle($event)">Utiliser le magnetisme</mat-slide-toggle>
+    <hr />
+    <label>Coin magnétisé : </label>
+    <div class="contenue">
+        <div #radiobutton class="buttons">
+            <input
+                *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"
+                type="radio"
+                name="coin"
+                value="0"
+                (click)="changeMagnetismPoint(number)"
+                checked="checked"
+            />
+        </div>
+    </div>
+</div>

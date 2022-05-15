@@ -1,0 +1,24 @@
+.container {
+    min-height: 100%;
+    max-width: 100%;
+    display: flex;
+}
+
+.drawing-container {
+    overflow: auto;
+    flex: 1 1 auto;
+    background-image: url(background/2obw9yylddr51.gif);
+    background-repeat: unset;
+    background-size: 100%;
+    width: 100%;
+    border: 2px solid var(--darker);
+}
+
+.drawing {
+    display: grid;
+    width: min-content;
+    outline: none;
+}
+
+app-sidebar {
+}

@@ -1,0 +1,61 @@
+<div>
+    <button
+        (click)="selectText()"
+        [ngClass]="{ active: getCurrentTool() === 'text' }"
+        matTooltip="text (T)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <i class="fas fa-text"></i>
+    </button>
+    <div class="popup" #popup [ngStyle]="{ display: getCurrentTool() != 'text' ? 'none' : 'block' }" cdkDrag>
+        <div class="popup-header">
+            <div id="header" class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" cdkDragHandle>
+                <label>Paramètres</label>
+                <button class="close-button" (click)="closeParametre()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <label>Taille police: {{ policeSize }}</label>
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="POLICE_MAX_SIZE"
+                    [min]="POLICE_MIN_SIZE"
+                    [(ngModel)]="policeSize"
+                    (input)="changePoliceSizeSlider($event)"
+                ></mat-slider>
+                <hr />
+                <label>
+                    Police du texte:
+                    <select #fontSelector (change)="changeFont($event.target.value)" style="width: 50%">
+                        <option value="Arial">Arial</option>
+                        <option value="Times new roman">Times New Roman</option>
+                        <option value="Lucida Console">Lucida Console</option>
+                        <option value="Lucida Handwriting">Lucida Handwriting</option>
+                        <option value="Copperplate">Consolas</option>
+                    </select>
+                </label>
+                <hr />
+                <label>
+                    Style de la police:
+                    <select #fontStyleSelector (change)="changeFontStyle($event.target.value)" style="width: 50%">
+                        <option value="">Aucun</option>
+                        <option value="Bold">Gras</option>
+                        <option value="Italic">Italique</option>
+                        <option value="Bold Italic">Gras et Italique</option>
+                    </select>
+                </label>
+                <hr />
+                <label>
+                    Alignement:
+                    <select #alignSelector (change)="changeAlign($event.target.value)" style="width: 50%">
+                        <option value="left">Gauche</option>
+                        <option value="center">Centre</option>
+                        <option value="right">Droite</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

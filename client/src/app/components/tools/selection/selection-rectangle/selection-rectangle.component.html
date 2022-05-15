@@ -1,0 +1,57 @@
+<div
+    #box
+    id="selectionRect"
+    [ngStyle]="{
+        display: drawingService.selected && toolSelector.currentTool.getCurrentToolString() === 'selectionRectangle' ? 'block' : 'none'
+    }"
+    [style.left.px]="selectionRectangleService.boxResizerPosition.x"
+    [style.top.px]="selectionRectangleService.boxResizerPosition.y"
+    [style.width.px]="selectionRectangleService.boxResizerDimension.x"
+    [style.height.px]="selectionRectangleService.boxResizerDimension.y"
+>
+    <div>
+        <button class="buttonResizer upper-left" [style.left.px]="0" [style.top.px]="0" (mousedown)="selectionRectangleService.setStatus(1)"></button>
+        <button
+            class="buttonResizer upper-middle"
+            [style.left.px]="selectionRectangleService.boxResizerDimension.x / 2"
+            [style.top.px]="0"
+            (mousedown)="selectionRectangleService.setStatus(2)"
+        ></button>
+        <button
+            class="buttonResizer upper-right"
+            [style.left.px]="selectionRectangleService.boxResizerDimension.x"
+            [style.top.px]="0"
+            (mousedown)="selectionRectangleService.setStatus(3)"
+        ></button>
+        <button
+            class="buttonResizer middle-left"
+            [style.left.px]="0"
+            [style.top.px]="selectionRectangleService.boxResizerDimension.y / 2"
+            (mousedown)="selectionRectangleService.setStatus(4)"
+        ></button>
+        <button
+            class="buttonResizer middle-right"
+            [style.left.px]="selectionRectangleService.boxResizerDimension.x"
+            [style.top.px]="selectionRectangleService.boxResizerDimension.y / 2"
+            (mousedown)="selectionRectangleService.setStatus(6)"
+        ></button>
+        <button
+            class="buttonResizer bottom-left"
+            [style.left.px]="0"
+            [style.top.px]="selectionRectangleService.boxResizerDimension.y"
+            (mousedown)="selectionRectangleService.setStatus(7)"
+        ></button>
+        <button
+            class="buttonResizer bottom-middle"
+            [style.left.px]="selectionRectangleService.boxResizerDimension.x / 2"
+            [style.top.px]="selectionRectangleService.boxResizerDimension.y"
+            (mousedown)="selectionRectangleService.setStatus(8)"
+        ></button>
+        <button
+            class="buttonResizer bottom-right"
+            [style.left.px]="selectionRectangleService.boxResizerDimension.x"
+            [style.top.px]="selectionRectangleService.boxResizerDimension.y"
+            (mousedown)="selectionRectangleService.setStatus(9)"
+        ></button>
+    </div>
+</div>

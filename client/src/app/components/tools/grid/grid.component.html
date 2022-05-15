@@ -1,0 +1,40 @@
+<div>
+    <button id="gridComponent" (click)="selectGrid()" matTooltip="Grille (G)" matTooltipPosition="right" matTooltipClass="tooltip right">
+        <span class="material-icons"> grid_4x4 </span>
+    </button>
+    <div class="popup" #popup cdkDrag>
+        <div class="popup-header">
+            <div id="header" class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" cdkDragHandle>
+                <label>Paramètres</label>
+                <button class="close-button" (click)="closeParametre()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <mat-slide-toggle [checked]="drawingService.showGrid" (change)="toggle($event)">Afficher grille!</mat-slide-toggle>
+                <hr />
+                <label>Taille des carrés (px): {{ drawingService.squareSize }}</label>
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="SQUARE_MAX_SIZE"
+                    [min]="SQUARE_MIN_SIZE"
+                    [(ngModel)]="drawingService.squareSize"
+                    (input)="changeSquareSizeSlider($event)"
+                    (keydown)="$event.stopPropagation()"
+                ></mat-slider>
+                <hr />
+                <label>Opacité (px): {{ drawingService.opacity }}</label>
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="OPACITY_MAX"
+                    [min]="OPACITY_MIN"
+                    [(ngModel)]="drawingService.opacity"
+                    (input)="changeOpacitySlider($event)"
+                    (keydown)="$event.stopPropagation()"
+                ></mat-slider>
+                <hr />
+                <app-magnetism></app-magnetism>
+            </div>
+        </div>
+    </div>
+</div>

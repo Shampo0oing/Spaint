@@ -1,0 +1,57 @@
+<div
+    #box
+    id="selectionEllipse"
+    [ngStyle]="{
+        display: drawingService.selected && toolSelector.currentTool.getCurrentToolString() === 'selectionEllipse' ? 'block' : 'none'
+    }"
+    [style.left.px]="selectionEllipseService.boxResizerPosition.x"
+    [style.top.px]="selectionEllipseService.boxResizerPosition.y"
+    [style.width.px]="selectionEllipseService.boxResizerDimension.x"
+    [style.height.px]="selectionEllipseService.boxResizerDimension.y"
+>
+    <div>
+        <button class="buttonResizer upper-left" [style.left.px]="0" [style.top.px]="0" (mousedown)="selectionEllipseService.setStatus(1)"></button>
+        <button
+            class="buttonResizer upper-middle"
+            [style.left.px]="selectionEllipseService.boxResizerDimension.x / 2"
+            [style.top.px]="0"
+            (mousedown)="selectionEllipseService.setStatus(2)"
+        ></button>
+        <button
+            class="buttonResizer upper-right"
+            [style.left.px]="selectionEllipseService.boxResizerDimension.x"
+            [style.top.px]="0"
+            (mousedown)="selectionEllipseService.setStatus(3)"
+        ></button>
+        <button
+            class="buttonResizer middle-left"
+            [style.left.px]="0"
+            [style.top.px]="selectionEllipseService.boxResizerDimension.y / 2"
+            (mousedown)="selectionEllipseService.setStatus(4)"
+        ></button>
+        <button
+            class="buttonResizer middle-right"
+            [style.left.px]="selectionEllipseService.boxResizerDimension.x"
+            [style.top.px]="selectionEllipseService.boxResizerDimension.y / 2"
+            (mousedown)="selectionEllipseService.setStatus(6)"
+        ></button>
+        <button
+            class="buttonResizer bottom-left"
+            [style.left.px]="0"
+            [style.top.px]="selectionEllipseService.boxResizerDimension.y"
+            (mousedown)="selectionEllipseService.setStatus(7)"
+        ></button>
+        <button
+            class="buttonResizer bottom-middle"
+            [style.left.px]="selectionEllipseService.boxResizerDimension.x / 2"
+            [style.top.px]="selectionEllipseService.boxResizerDimension.y"
+            (mousedown)="selectionEllipseService.setStatus(8)"
+        ></button>
+        <button
+            class="buttonResizer bottom-right"
+            [style.left.px]="selectionEllipseService.boxResizerDimension.x"
+            [style.top.px]="selectionEllipseService.boxResizerDimension.y"
+            (mousedown)="selectionEllipseService.setStatus(9)"
+        ></button>
+    </div>
+</div>

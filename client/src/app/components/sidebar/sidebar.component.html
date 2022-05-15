@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="tools-button">
+        <app-pencil></app-pencil>
+        <app-eraser></app-eraser>
+        <app-sceau></app-sceau>
+        <app-aerosol></app-aerosol>
+        <hr class="rounded" />
+        <app-rectangle></app-rectangle>
+        <app-ellipse></app-ellipse>
+        <app-line></app-line>
+        <app-polygon></app-polygon>
+        <hr class="rounded" />
+        <app-grid></app-grid>
+        <app-clipboard></app-clipboard>
+        <app-text></app-text>
+        <app-stamp></app-stamp>
+        <app-selection></app-selection>
+        <div #colorPickers class="color-picker">
+            <div class="color-wrapper">
+                <div class="first-color">
+                    <app-color-picker
+                        [popupTitle]="'Couleur primaire'"
+                        [initialColor]="drawingService.primaryColor"
+                        (colorEmitter)="drawingService.primaryColor = $event"
+                        (popupOpened)="closeAllColorPickers()"
+                        (leftClickHistory)="drawingService.primaryColor = $event"
+                        (rightClickHistory)="drawingService.secondaryColor = $event"
+                    ></app-color-picker>
+                </div>
+                <div class="second-color">
+                    <app-color-picker
+                        [popupTitle]="'Couleur secondaire'"
+                        [initialColor]="drawingService.secondaryColor"
+                        (colorEmitter)="drawingService.secondaryColor = $event"
+                        (popupOpened)="closeAllColorPickers()"
+                        (leftClickHistory)="drawingService.primaryColor = $event"
+                        (rightClickHistory)="drawingService.secondaryColor = $event"
+                    ></app-color-picker>
+                </div>
+                <span class="swap-button material-icons" (click)="drawingService.swapColors()"
+                      matTooltip="Échanger les deux couleurs"
+                      matTooltipPosition="right"
+                      matTooltipClass="tooltip right"
+                >open_in_full</span>
+            </div>
+        </div>
+        <app-pipette></app-pipette>
+    </div>
+    <div class="bottom-button">
+        <button matRipple (click)="openDialog(0)"
+                matTooltip="Nouveau Dessin"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+        >
+            <i class="fas fa-plus"></i>
+        </button>
+
+        <button matRipple (click)="openDialog(1)"
+                matTooltip="Exporter sur l'ordinateur"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+        >
+            <i class="fas fa-save"></i>
+        </button>
+
+        <button matRipple (click)="openDialog(2)"
+                matTooltip="Sauvegarder sur le serveur"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+        >
+            <i class="fas fa-cloud-upload-alt"></i>
+        </button>
+
+        <button matRipple (click)="openDialog(3)"
+                matTooltip="Galerie de dessin"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+        >
+            <i class="fas fa-folder"></i>
+        </button>
+
+        <button matRipple routerLink="/main-page"
+                matTooltip="Accueil"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+        >
+            <i class="fas fa-home"></i>
+        </button>
+    </div>
+</div>

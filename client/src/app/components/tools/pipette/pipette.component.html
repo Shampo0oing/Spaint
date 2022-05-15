@@ -1,0 +1,35 @@
+<button
+    [ngClass]="{ active: getCurrentTool() === 'pipette' }"
+    matTooltip="pipette (I)"
+    matTooltipPosition="right"
+    matTooltipClass="tooltip right"
+    (click)="selectPipette()"
+>
+    <span class="material-icons"> colorize </span>
+</button>
+
+<div class="popup" #popup [ngStyle]="{ display: getCurrentTool() != 'pipette' ? 'none' : 'block' }" cdkDrag>
+    <div class="popup-header">
+        <div id="header" class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" cdkDragHandle>
+            <label>Loupe</label>
+            <button class="close-button" (click)="closeParametre()">
+                <i id="x" class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="popup-content">
+            <div class="message-wrapper">
+                <div class="circle-message">
+                    <div class="content">
+                        <div>Pointer un élément sur le canvas de dessin pour activer la loupe</div>
+                        <i class="fas fa-search fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+            <div #magnifierWrapper class="magnifier-wrapper">
+                <div class="grid-cursor"></div>
+                <div class="magnifier-grid"></div>
+                <canvas #magnifier id="magnifier" [attr.width]="11" [attr.height]="11"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

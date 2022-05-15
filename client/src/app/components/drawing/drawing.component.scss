@@ -1,0 +1,23 @@
+canvas {
+    cursor: crosshair;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.NoCrosshair {
+    cursor: none;
+}
+
+#canvas {
+    z-index: 0;
+    background-color: white;
+}
+
+#drawCanvas {
+    z-index: 1;
+}
+
+#canvas-container {
+    position: relative;
+}

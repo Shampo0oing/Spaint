@@ -1,0 +1,164 @@
+@import '../../../../styles';
+
+.dialog-container {
+    .body-container {
+        display: flex;
+        padding: 1em 0;
+        margin: 0 -0.5em;
+
+        & > :not(:first-child) {
+            margin-left: 1em;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .preview {
+                width: 300px;
+                height: 240px;
+                object-fit: contain;
+                image-rendering: smooth;
+                border-width: 3px;
+                border-color: var(--darker);
+                border-radius: 4px;
+            }
+            .size {
+                padding: 0.5em;
+                margin-left: auto;
+                margin-bottom: -4.5em;
+                z-index: 1;
+            }
+
+            mat-form-field {
+                background-color: var(--darker);
+                border-radius: 4px;
+                padding: 1em 1em 0.25em 1em;
+                margin-top: 1em;
+                overflow: visible;
+
+                input:-webkit-autofill {
+                    -webkit-box-shadow: 0 0 0 1000px var(--darker) inset !important;
+                    -webkit-text-fill-color: var(--text-color) !important;
+                }
+
+                ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .format-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .extension-container {
+                background-color: var(--darker);
+                border-radius: 4px;
+                padding: 1em;
+
+                .radio-group {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    margin-top: 1em;
+                }
+            }
+
+            .filter-container {
+                display: flex;
+                flex-direction: column;
+                background-color: var(--darker);
+                border-radius: 4px;
+                padding: 1em;
+                margin-top: 1em;
+
+                mat-slider {
+                    margin-top: 2em;
+                }
+
+                .radio-container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    row-gap: 1em;
+                    margin-top: 1em;
+
+                    ::ng-deep.mat-radio-label-content {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 0.25em;
+                    }
+                }
+            }
+        }
+    }
+    .button-row {
+        display: flex;
+        gap: 1em;
+        flex-direction: row;
+        background-color: var(--darker);
+        margin: 0 -24px -24px -24px;
+        padding: 0.5em 1em;
+        color: var(--text-color);
+        button {
+            text-transform: uppercase;
+        }
+
+        .telecharger {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .annuler {
+            margin-left: auto;
+        }
+
+        .imgur {
+            width: 100px;
+            height: 36px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05) url(logo/imgur-Récupéré.svg) no-repeat center center;
+            background-size: cover;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        svg {
+            display: none;
+            height: 36px;
+            width: 36px;
+            background-image: url(../svg/loading.svg);
+            background-size: cover;
+        }
+
+        .image-action {
+            display: none;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            text-align: center;
+            button {
+                min-width: fit-content;
+            }
+
+            .url {
+                display: flex;
+                align-items: center;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 4px;
+                height: 100%;
+                max-width: 15rem;
+
+                a {
+                    text-transform: lowercase;
+                    font-size: 14px;
+                    white-space: nowrap;
+                    overflow: hidden !important;
+                    text-overflow: ellipsis;
+                    margin: 0 0.5em;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

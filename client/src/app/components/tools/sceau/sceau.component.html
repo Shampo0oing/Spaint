@@ -1,0 +1,33 @@
+<div>
+    <button
+        (click)="selectSceau()"
+        [ngClass]="{ active: getCurrentTool() === 'sceau' }"
+        matTooltip="sceau de peinture (B)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <i class="fas fa-fill-drip"></i>
+    </button>
+
+    <div class="popup" #popup [ngStyle]="{ display: getCurrentTool() != 'sceau' ? 'none' : 'block' }" cdkDrag>
+        <div class="popup-header">
+            <div id="header" class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" cdkDragHandle>
+                <label>Paramètres</label>
+                <button class="close-button" (click)="closeParametre()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <label>Tolérance d'écart (%): {{ drawingService.tolEcart }}</label>
+                <br />
+                <mat-slider
+                    id="epaisseurSlider"
+                    [max]="SCEAU_MAX_TOL"
+                    [min]="SCEAU_MIN_TOL"
+                    [(ngModel)]="drawingService.tolEcart"
+                    (input)="changeTolEcartSlider($event)"
+                ></mat-slider>
+            </div>
+        </div>
+    </div>
+</div>

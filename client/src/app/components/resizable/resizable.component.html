@@ -1,0 +1,31 @@
+<div
+    #box
+    id="resizer"
+    class="resizable-draggable"
+    [style.width.px]="resizerService.width"
+    [style.height.px]="resizerService.height"
+    [ngStyle]="{ display: drawingService.selected || drawingService.mouseDown ? 'none' : 'block' }"
+    (click)="$event.stopPropagation()"
+>
+    <button
+        id="corner"
+        [style.left.px]="resizerService.width"
+        [style.top.px]="resizerService.height"
+        class="resize-action"
+        (mousedown)="setStatus(1); $event.stopPropagation(); $event.preventDefault()"
+    ></button>
+    <button
+        id="bottom"
+        [style.left.px]="resizerService.width / 2"
+        [style.top.px]="resizerService.height"
+        class="resize-action"
+        (mousedown)="setStatus(2); $event.stopPropagation(); $event.preventDefault()"
+    ></button>
+    <button
+        id="right"
+        [style.left.px]="resizerService.width"
+        [style.top.px]="resizerService.height / 2"
+        class="resize-action"
+        (mousedown)="setStatus(3); $event.stopPropagation(); $event.preventDefault()"
+    ></button>
+</div>

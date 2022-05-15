@@ -1,0 +1,33 @@
+<div>
+    <button (click)="openClipBoard()" matTooltip="presse papier" matTooltipPosition="right" matTooltipClass="tooltip right">
+        <i class="far fa-clipboard"></i>
+    </button>
+
+    <div class="popup" id="popup" #popup cdkDrag>
+        <div class="popup-header">
+            <div id="header" class="flex items-center text-white uppercase text-spaced pl-3 ml-auto bg-black" cdkDragHandle>
+                <label>Paramètres</label>
+                <button class="close-button" (click)="closeClipBoard()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contenue">
+                <button [ngClass]="{ notClickable: !drawingService.selected }" (click)="copy()" matTooltip="ctrl+c" matTooltipPosition="right">
+                    <i class="far fa-copy"></i> <span class="tab"> copier</span>
+                </button>
+
+                <button [ngClass]="{ notClickable: clipboardService.isEmpty() }" (click)="paste()" matTooltip="ctrl+v" matTooltipPosition="right">
+                    <i class="fas fa-paste"></i> <span class="tab"> coller</span>
+                </button>
+                <button [ngClass]="{ notClickable: !drawingService.selected }" (click)="cut()" matTooltip="ctrl+x" matTooltipPosition="right">
+                    <i class="fas fa-cut"></i>
+                    <span class="tab"> couper</span>
+                </button>
+
+                <button [ngClass]="{ notClickable: !drawingService.selected }" (click)="delete()" matTooltip="delete" matTooltipPosition="right">
+                    <i class="far fa-trash-alt"></i> <span class="tab"> supprimer</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

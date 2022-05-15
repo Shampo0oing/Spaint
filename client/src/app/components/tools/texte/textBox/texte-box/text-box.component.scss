@@ -1,0 +1,19 @@
+#textBox {
+    position: absolute;
+    outline: black dashed 1px;
+    z-index: 0;
+    cursor: crosshair;
+    visibility: visible;
+}
+
+.buttonResizer {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    padding: 0;
+    background-color: var(--dark);
+    box-shadow: 0 0 0 2px var(--text-color), 0 0 0 4px var(--dark);
+    border-radius: 50%;
+    visibility: visible;
+    pointer-events: none;
+}

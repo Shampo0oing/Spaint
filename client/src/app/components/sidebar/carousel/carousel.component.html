@@ -1,0 +1,108 @@
+<div class="dialog-container text-spaced" (mousemove)="$event.preventDefault()">
+    <div class="dialog-header" mat-dialog-title>
+        Carrousel de dessins
+        <button class="close-button ml-auto" (click)="closeDialog()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="input-tag">
+        <mat-form-field hintLabel="Minimum un caractère et pas de symboles" appearance="fill">
+            <mat-label>Filtrage par nom</mat-label>
+            <input
+                matInput
+                type="text"
+                #nameInput
+                maxlength="10"
+                [formControl]="nameSearchFormControl"
+                (keydown)="$event.stopPropagation()"
+                [autofocus]="false"
+            />
+            <mat-hint align="end">{{ nameInput.value?.length || 0 }}/10</mat-hint>
+        </mat-form-field>
+        <mat-form-field hintLabel="Pas de symboles ni d'espaces" appearance="fill">
+            <mat-label>Filtrage par étiquette(s)</mat-label>
+            <mat-chip-list #chipList aria-label="Tag selection">
+                <mat-chip *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="remove(tag)">
+                    {{ tag }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input
+                    matInput
+                    maxlength="10"
+                    #tagInput
+                    type="text"
+                    [formControl]="tagFormControl"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="true"
+                    (matChipInputTokenEnd)="add($event)"
+                    (keydown)="$event.stopPropagation()"
+                />
+            </mat-chip-list>
+            <mat-hint align="end">{{ tagInput.value?.length || 0 }}/10</mat-hint>
+        </mat-form-field>
+        <div class="research-button">
+            <button
+                matRipple
+                *ngIf="!nameSearchFormControl.errors && !tagFormControl.errors"
+                (click)="searchDrawings(nameInput.value, tags); carousel.scrollTo(0, 0)"
+            >
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="body">
+        <div class="slider-container">
+            <div class="arrow" (mousedown)="scrollDown(carousel)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div #carousel class="drawings-container">
+                <div tabindex="-1"
+                    class="drawing-card"
+                    id="drawing-card"
+                    *ngFor="let drawing of (filteredDrawings ? filteredDrawings : drawings)"
+                    (click)="currentDrawing = drawing; selectDrawing($event, carousel)"
+                >
+                    <div class="header image-border">{{ drawing.name }}</div>
+                    <img mat-card-image src="{{ drawing.link }}" alt="Indisponible" class="image" />
+                    <div
+                        class="tags-container image-border"
+                        matTooltip="{{ drawing.tags?.join(' ') }}"
+                        [matTooltipShowDelay]="700"
+                        matTooltipClass="tooltip above"
+                        matTooltipPosition="above"
+                    >
+                        <mat-chip *ngFor="let tag of drawing.tags">{{ tag }}</mat-chip>
+                    </div>
+                </div>
+            </div>
+            <div class="error-container">
+                <div #loading class="loading-container commonProperties">
+                    <svg></svg>
+                </div>
+                <div #errorMessage class="error-message-container commonProperties">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="error-message">{{ message }}</div>
+                </div>
+            </div>
+            <div class="arrow" (mousedown)="scrollUp(carousel)">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-button" (mousedown)="$event.preventDefault()">
+        <button mat-stroked-button class="delete-all" (click)="deleteAll()">Supprimer tout les dessins</button>
+        <div class="right-button">
+            <button mat-stroked-button class="delete" (click)="deleteOne()">Supprimer</button>
+            <button mat-button class="open" (click)="tryOpeningDrawing()">Ouvrir</button>
+        </div>
+    </div>
+    <div #confirm class="confirm-container" style="display: none">
+        <div class="background-disabled"></div>
+        <div class="confirm-popup">
+            Vous êtes sur le point d'abandonner vos changements
+            <button mat-stroked-button (click)="confirm.style.display = 'none'">ANNULER</button>
+            <button mat-button (click)="openDrawing()">COMFIRMER</button>
+        </div>
+    </div>
+</div>

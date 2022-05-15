@@ -1,0 +1,11 @@
+<div
+    #box
+    id="textBox"
+    [ngStyle]="{
+        display: textService.writing && toolSelector.currentTool.getCurrentToolString() === 'text' ? 'block' : 'none'
+    }"
+    [style.left.px]="textService.textInitialCoord.x"
+    [style.top.px]="textService.textInitialCoord.y"
+    [style.width.px]="textService.textDimension.x"
+    [style.height.px]="textService.textDimension.y"
+></div>

@@ -1,0 +1,44 @@
+#resizer {
+    cursor: none;
+    visibility: hidden;
+    position: absolute;
+    outline: grey dotted 2px;
+    z-index: 0;
+    &:active {
+        cursor: crosshair;
+        visibility: visible;
+    }
+}
+
+button {
+    position: absolute;
+    width: 1.5vh;
+    height: 1.5vh;
+    padding: 0;
+    background-color: var(--dark);
+    box-shadow: 0 0 0 0.2vh var(--text-color), 0 0 0 0.4vh var(--dark);
+    border-radius: 50%;
+    visibility: visible;
+}
+
+#right {
+    transform: translate(-50%, -50%);
+    &:hover,
+    &:active {
+        cursor: ew-resize;
+    }
+}
+#bottom {
+    transform: translate(-50%, -50%);
+    &:hover,
+    &:active {
+        cursor: ns-resize;
+    }
+}
+#corner {
+    transform: translate(-50%, -50%);
+    &:hover,
+    &:active {
+        cursor: nwse-resize;
+    }
+}

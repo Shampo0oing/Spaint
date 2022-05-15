@@ -1,0 +1,157 @@
+<div class="button-wrapper">
+    <div class="color-button" (click)="openColorPicker()" [ngStyle]="{ 'background-color': color.toRgba() }"
+         matTooltip="{{popupTitle}}"
+         matTooltipPosition="right"
+         matTooltipClass="tooltip right"
+    ></div>
+</div>
+
+<div class="popup" id="popup" #popup cdkDrag>
+    <div class="popup-header" cdkDragHandle>
+        <div class="popup-title uppercase text-spaced">{{ popupTitle }}</div>
+        <button class="close-button" (click)="closeColorPicker()">
+            <i class="fas fa-times fa-lg"></i>
+        </button>
+    </div>
+
+    <mat-tab-group headerPosition="below">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-1">palette</mat-icon>
+                <div class="flex items-center uppercase text-spaced">Palette</div>
+            </ng-template>
+            <div class="canvas-container">
+                <app-color-palette [color]="sliderColor" (colorChange)="setColor($event)"></app-color-palette>
+                <app-color-slider (colorChange)="setSliderColor($event)"></app-color-slider>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-1">tune</mat-icon>
+                <div class="flex items-center uppercase text-spaced">Outils</div>
+            </ng-template>
+            <div class="custom-container">
+                <div class="red-settings" id="r">
+                    <div class="letter">R</div>
+                    <mat-slider [max]="255" [min]="0" [(ngModel)]="color.r" (input)="validateRgbaSliderInput($event.source)"></mat-slider>
+                    <label class="rgb-input">
+                        <input
+                            type="number"
+                            min="0"
+                            max="255"
+                            [value]="color.r"
+                            (input)="validateRgbaInput($event)"
+                            (keydown)="$event.stopPropagation()"
+                            required
+                        />
+                    </label>
+                </div>
+                <div class="green-settings" id="g">
+                    <div class="letter">G</div>
+                    <mat-slider [max]="255" [min]="0" [(ngModel)]="color.g" (input)="validateRgbaSliderInput($event.source)"></mat-slider>
+                    <label class="rgb-input">
+                        <input
+                            type="number"
+                            min="0"
+                            max="255"
+                            [value]="color.g"
+                            (input)="validateRgbaInput($event)"
+                            (keydown)="$event.stopPropagation()"
+                            required
+                        />
+                    </label>
+                </div>
+                <div class="blue-settings" id="b">
+                    <div class="letter">B</div>
+                    <mat-slider [max]="255" [min]="0" [(ngModel)]="color.b" (input)="validateRgbaSliderInput($event.source)"></mat-slider>
+                    <label class="rgb-input">
+                        <input
+                            type="number"
+                            min="0"
+                            max="255"
+                            [value]="color.b"
+                            (input)="validateRgbaInput($event)"
+                            (keydown)="$event.stopPropagation()"
+                            required
+                        />
+                    </label>
+                </div>
+                <div class="opacity-settings" id="a">
+                    <div class="letter">A</div>
+                    <mat-slider [max]="1" [min]="0" [step]="0.01" [(ngModel)]="color.a" (input)="validateRgbaSliderInput($event.source)"></mat-slider>
+                    <label class="rgb-input">
+                        <input
+                            type="number"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            [value]="color.a"
+                            (input)="validateRgbaInput($event)"
+                            (keydown)="$event.stopPropagation()"
+                            required
+                        />
+                    </label>
+                </div>
+                <div class="bottom-code-input">
+                    <div class="color-preview" [ngStyle]="{ 'background-color': color.toRgba() }">
+                        <div class="color-transparency"></div>
+                    </div>
+                    <div class="code-container">
+                        <label for="hex-code" class="title text-spaced">HEX</label>
+                        <div class="hex-input-container">
+                            <input
+                                id="hex-code"
+                                matInput
+                                maxlength="7"
+                                [value]="color.toHex()"
+                                (input)="validateHexInput($event)"
+                                (change)="validateHexInput($event)"
+                                (keydown)="$event.stopPropagation()"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="code-container">
+                        <label for="rgba-code" class="title text-spaced">RGBA</label>
+                        <div class="rgba-input-container">
+                            <input
+                                id="rgba-code"
+                                matInput
+                                maxlength="19"
+                                [value]="color.toRgba(false)"
+                                (input)="validateLongRgbaInput($event)"
+                                (change)="validateLongRgbaInput($event)"
+                                (keydown)="$event.stopPropagation()"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-1">history</mat-icon>
+                <div class="flex items-center uppercase text-spaced">Historique</div>
+            </ng-template>
+            <div class="color-history-container flex">
+                <div
+                    class="circle"
+                    *ngFor="let paint of colorPickerService.colorHistory"
+                    [ngStyle]="{ 'background-color': paint.toRgba() }"
+                    (click)="leftClickHistory.emit(paint.toRgba())"
+                    (contextmenu)="rightClickHistory.emit(paint.toRgba()); $event.preventDefault()"
+                >
+                    <div class="color-transparency" *ngIf="paint.a != 1"></div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div class="confirm-button">
+        <button mat-button class="uppercase text-spaced font-medium" (click)="cancelColor()">Annuler</button>
+        <button mat-button class="uppercase text-spaced font-medium" (click)="confirmColor()">Choisir</button>
+    </div>
+</div>

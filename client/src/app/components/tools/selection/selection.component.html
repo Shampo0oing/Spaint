@@ -1,0 +1,65 @@
+<div class="container">
+    <hr class="rounded" />
+    <button
+        (click)="selectSelectionRectangle()"
+        [ngClass]="{ active: getCurrentTool() === 'selectionRectangle' }"
+        matTooltip="selection par rectangle (R)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <span class="material-icons">crop_free</span>
+    </button>
+    <button
+        (click)="selectSelectionEllipse()"
+        [ngClass]="{ active: getCurrentTool() === 'selectionEllipse' }"
+        matTooltip="selection par ellipse (S)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <span class="material-icons">donut_large</span>
+    </button>
+    <button
+        (click)="selectSelectionLasso()"
+        [ngClass]="{ active: getCurrentTool() === 'selectionLasso' }"
+        matTooltip="selection par lasso polygonal (V)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <i class="fab fa-connectdevelop"></i>
+    </button>
+
+    <button
+        (click)="selectAll()"
+        [ngClass]="{ notClickable: drawingService.mouseDown }"
+        matTooltip="tout selectionner (ctrl+A)"
+        matTooltipPosition="right"
+        matTooltipClass="tooltip right"
+    >
+        <span class="material-icons"> select_all </span>
+    </button>
+    <!--    <div class="fakeTool"></div>-->
+    <div class="undo-redo-container">
+        <hr class="rounded" />
+        <div class="undo-redo-wrapper">
+            <button
+                (click)="undo()"
+                [ngClass]="{ notClickable: annulerRefaireService.undoActions.length === 0 || drawingService.mouseDown }"
+                matTooltip="annuler (ctrl+z)"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+            >
+                <i class="fas fa-undo"></i>
+            </button>
+            <button
+                (click)="redo()"
+                [ngClass]="{ notClickable: annulerRefaireService.redoActions.length === 0 || drawingService.mouseDown }"
+                matTooltip="refaire (ctrl+shift+z)"
+                matTooltipPosition="right"
+                matTooltipClass="tooltip right"
+            >
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+        <hr class="rounded" />
+    </div>
+</div>

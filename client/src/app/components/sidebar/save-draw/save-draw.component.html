@@ -1,0 +1,51 @@
+<div class="dialog-container text-spaced">
+    <div class="dialog-header" mat-dialog-title>
+        Sauvegarde du dessin
+        <button class="close-button ml-auto" (click)="closeDialog()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="body-container">
+        <mat-form-field hintLabel="Contient au moins un caractère et pas de symboles." appearance="fill">
+            <mat-label>Nom du dessin</mat-label>
+            <input
+                [(ngModel)]="nomDessin"
+                matInput
+                type="text"
+                #nameInput
+                maxlength="10"
+                [formControl]="nameFormControl"
+                (keydown)="$event.stopPropagation()"
+                [autofocus]="true"
+            />
+            <mat-hint align="end">{{ nameInput.value?.length || 0 }}/10</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field hintLabel="Pas de symboles ni d'espaces. Maximum 10 étiquettes." appearance="fill">
+            <mat-label>Ajouter une étiquette</mat-label>
+            <mat-chip-list #tagList aria-label="Tag selection">
+                <mat-chip *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="remove(tag)">
+                    {{ tag }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input
+                    matInput
+                    type="text"
+                    #tagInput
+                    maxlength="10"
+                    [formControl]="tagFormControl"
+                    [matChipInputFor]="tagList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="true"
+                    (matChipInputTokenEnd)="add($event)"
+                    (keydown)="$event.stopPropagation()"
+                />
+            </mat-chip-list>
+            <mat-hint align="end">{{ tagInput.value?.length || 0 }}/10</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="button-row">
+        <button mat-stroked-button color="accent" (click)="closeDialog()">Annuler</button>
+        <button mat-button class="mat-button" [disabled]="disabled" *ngIf="!nameFormControl.errors && !tagFormControl.errors" (click)="tryToUploadCanvas(nameInput.value)">Sauvegarder</button>
+    </div>
+</div>

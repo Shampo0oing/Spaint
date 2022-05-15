@@ -1,0 +1,9 @@
+@import './src/app/components/tools/generic-tool/generic-tool.component.scss';
+
+#selectionRect {
+    cursor: none;
+    position: absolute;
+    outline: rgb(130, 128, 127) dotted 2px;
+    z-index: 0;
+    cursor: crosshair;
+}
