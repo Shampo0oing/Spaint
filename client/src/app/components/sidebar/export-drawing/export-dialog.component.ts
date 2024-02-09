@@ -134,4 +134,20 @@ export class ExportDialogComponent implements AfterViewInit, OnInit {
             panelClass: ['dark-snackbar', 'text-spaced'],
         });
     }
+
+    violateTSLintRules() {
+        // Violates the "no-var-keyword" rule
+        var x = 10;
+
+        // Violates the "triple-equals" rule
+        if (x == 10) {
+            console.log('x is 10');
+        }
+
+        // Violates the "no-unused-expression" rule
+        x;
+
+        // Violates the "curly" rule
+        if (x > 5) console.log('x is greater than 5');
+    }
 }
